@@ -1,0 +1,329 @@
+NAME: TEJAS SANTOSH DHEMBE
+PRN: 245100155
+CLASS: CSE-S6
+ASSIGNMENT NO.: 1
+
+
+1.Write a program to calculate sum of greatest and least elements  of an array.
+#include <stdio.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    int arr[n];
+    for(int i = 0; i < n; i++)
+        scanf("%d", &arr[i]);
+
+    int min = arr[0], max = arr[0];
+    for(int i = 1; i < n; i++) {
+        if(arr[i] < min) min = arr[i];
+        if(arr[i] > max) max = arr[i];
+    }
+        printf("\n");
+    printf(" The sum is : %d", min + max);
+    return 0;
+}
+
+
+
+2.Write a program to count the unique elements in array.
+
+#include <stdio.h>
+
+int main() {
+    int n, count = 0;
+    scanf("%d", &n);
+    int arr[n];
+    for(int i = 0; i < n; i++)
+        scanf("%d", &arr[i]);
+for(int i = 0; i < n; i++) {
+        int isUnique = 1;
+        for(int j = 0; j < n; j++) {
+            if(i != j && arr[i] == arr[j]) {
+                isUnique = 0;
+                break;
+ }
+        }
+        if(isUnique)
+            count++;
+    }
+printf("%d", count);
+    return 0;
+}
+
+
+
+
+3.Write a program to find missing element in an Array.
+Code : 
+#include <stdio.h>
+
+int main() {
+    int n, sum = 0, total;
+    scanf("%d", &n);
+    int arr[n - 1];
+    for(int i = 0; i < n - 1; i++) {
+        scanf("%d", &arr[i]);
+        sum += arr[i];
+    }
+    total = n * (n + 1) / 2;
+    printf("%d", total - sum);
+    return 0;
+}
+
+
+
+
+
+
+
+
+4.Write a program to reverse an array
+Code : 
+#include <stdio.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    int arr[n];
+    for(int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    for(int i = n - 1; i >= 0; i--) {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+5.Given a number of students, write a function to perform following operations Read students details in "struct student" (shown below) array Sort the array based on student id. struct student { char name[50]; int id; }; Write a function: struct student* solution(int N) that accept a number of students N. The function should read details of N students, sort the data in ascending order of id and return the sorted array of "struct student".
+Code :
+#include <iostream>
+#include <string>
+#include <algorithm>  // for std::swap
+using namespace std;
+
+struct student {
+    string name;
+    int id;
+};
+
+void sortStudents(student arr[], int n) {
+    for(int i = 0; i < n - 1; i++) {
+        for(int j = i + 1; j < n; j++) {
+            if(arr[i].id > arr[j].id) {
+                swap(arr[i], arr[j]);
+            }
+        }
+    }
+}
+
+student* solution(int N) {
+    static student arr[100];
+    for(int i = 0; i < N; i++) {
+        cin >> arr[i].name >> arr[i].id;
+    }
+    sortStudents(arr, N);
+    return arr;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    student* s = solution(n);
+    for(int i = 0; i < n; i++) {
+        cout << s[i].name << " " << s[i].id << "\n";
+    }
+    return 0;
+}
+
+
+6.Given two structure variables of type “struct Time” (given below), Calculate the difference between them. struct Time { int hours; int minutes; int seconds; };
+Code : 
+#include <iostream>
+
+using namespace std;
+class Time {
+    public: int hours;
+    int minutes;
+    int seconds;
+
+    void read() {
+        cin >> hours >> minutes >> seconds;
+    }
+};
+
+void diff(Time t1,Time t2){
+    int total1 = t1.hours * 3600 + t1.minutes * 60 + t1.seconds;
+    int total2 = t2.hours * 3600 + t2.minutes * 60 + t2.seconds;
+    int diff = abs(total2 - total1);
+    int hrs = diff / 3600;
+    diff %= 3600;
+    int mnts = diff / 60;
+    diff %= 60;
+    int scnds = diff % 60;
+    cout << hrs << ":" << mnts << ":" << scnds<< endl;
+}
+
+int main() {
+    
+    Time t1,t2;
+    t1.read();
+    t2.read();
+    diff(t1,t2);
+    
+
+}
+
+
+
+
+
+7.Store product details in a Product structure and display the product details along with the total cost of a product.
+Code : 
+#include <iostream>
+using namespace std;
+
+struct Product {
+    string name;
+    float price;
+    int quantity;
+
+    float totalCost() {
+        return price * quantity;
+    }
+
+    void read() {
+        cin >> name >> price >> quantity;
+    }
+
+    void print() {
+        cout << name << "\n";
+        cout << price << "\n";
+        cout << quantity << "\n";
+        cout << totalCost() << "\n";
+    }
+};
+
+int main() {
+    Product p;
+    p.read();
+    p.print();
+    return 0;
+}
+
+
+
+
+
+
+
+8.Given a number of persons in the party (C), count of items for party (N) and party items details (like name, price, quantity) calculate expense for each item (price*quantity) and total party expenses. Also, calculate the amount each person will have to pay via dividing total expense with a count of persons(C) in the party using Structure.
+Code : 
+#include <iostream>
+using namespace std;
+
+struct Item {
+    string name;
+    float price;
+    int quantity;
+
+    float total() {
+        return price * quantity;
+    }
+};
+
+int main() {
+    int C, N;
+    cin >> C >> N;
+
+    Item items[100];
+    float totalExpense = 0;
+
+    for(int i = 0; i < N; i++) {
+        cin >> items[i].name >> items[i].price >> items[i].quantity;
+        totalExpense += items[i].total();
+    }
+
+    float perPerson = totalExpense / C;
+
+    cout << totalExpense << endl;
+    cout << perPerson << endl;
+
+    for(int i = 0; i < N; i++) {
+        cout << items[i].name << " " << items[i].total() << endl;
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+9.Given two measurement (each measurement contains data in inches and feet), store them in Measurement structure and add them. Structure Measurment should store inches and feets details in seperate field.
+Code : 
+#include <iostream>
+using namespace std;
+
+struct Measurement {
+    int inches;
+    float feet;
+};
+
+Measurement add(Measurement a, Measurement b) {
+    Measurement result;
+    result.inches = a.inches + b.inches;
+    result.feet = a.feet + b.feet;
+    return result;
+}
+
+int main() {
+    Measurement m1, m2;
+    cin >> m1.inches >> m1.feet;
+    cin >> m2.inches >> m2.feet;
+
+    Measurement total = add(m1, m2);
+
+    cout << total.inches << " " << total.feet << endl;
+
+    return 0;
+}
+
+
+
+
+
+10.Given an integer denoting day of month and an array of integers representing number plates of cars traveling on that day, calculate total fines applied as per the following rules.
+Code :
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, day, fine = 0;
+    cin >> n;
+
+    int cars[1000];
+    for(int i = 0; i < n; i++) {
+        cin >> cars[i];
+    }
+
+    cin >> day;
+
+    for(int i = 0; i < n; i++) {
+        if ((day % 2 == 0 && cars[i] % 2 != 0) || (day % 2 != 0 && cars[i] % 2 == 0)) {
+            fine += 250;
+        }
+    }
+
+    cout << fine << endl;
+
+    return 0;
+}
